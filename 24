@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+#define INF 999
+
+int main()
+{
+    int cost[10][10],visited[10]={0};
+    int n,i,j,min,u,v,total=0;
+
+    printf("Enter vertices:");
+    scanf("%d",&n);
+
+    printf("Enter cost matrix:");
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            scanf("%d",&cost[i][j]);
+
+    visited[0]=1;
+
+    for(i=0;i<n-1;i++)
+    {
+        min=INF;
+
+        for(j=0;j<n;j++)
+        {
+            if(visited[j])
+            {
+                for(v=0;v<n;v++)
+                {
+                    if(!visited[v] && cost[j][v]<min)
+                    {
+                        min=cost[j][v];
+                        u=j;
+                        v=v;
+                    }
+                }
+            }
+        }
+
+        visited[v]=1;
+        total+=min;
+
+        printf("%d - %d = %d\n",u,v,min);
+    }
+
+    printf("Total cost=%d",total);
+
+    return 0;
+}
